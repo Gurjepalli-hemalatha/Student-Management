@@ -1,0 +1,175 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #49318c;
+            font-size: 32px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        nav {
+            margin: 20px 0;
+            line-height: 2.5;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5b45a0;
+            font-weight: bold;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e84393;
+        }
+
+        h2 {
+            color: #333;
+            margin: 25px 0;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        button {
+            width: 280px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(90deg, #764ba2, #e84393);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+                padding: 5px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 STUDENT MANAGEMENT</h1>
+
+    <hr>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="list.html">List Students</a> |
+        <a href="listOne.html">List Required Student</a> |
+        <a href="insert.html">Insert Student</a> |
+        <a href="update.html">Update Student</a> |
+        <a href="delete.html">Delete Student</a>
+    </nav>
+
+    <hr>
+
+    <h2>Welcome to Student Management System</h2>
+
+    <div class="menu">
+
+        <button onclick="location.href='list.html'">
+            1. 📋 List Students
+        </button>
+
+        <button onclick="location.href='listOne.html'">
+            2. 🔍 List Required Student
+        </button>
+
+        <button onclick="location.href='insert.html'">
+            3. ➕ Insert Student
+        </button>
+
+        <button onclick="location.href='update.html'">
+            4. ✏️ Update Student
+        </button>
+
+        <button onclick="location.href='delete.html'">
+            5. 🗑️ Delete Student
+        </button>
+
+    </div>
+
+    <footer>
+        <hr>
+        <p>© 2026 Student Management System | All Rights Reserved</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
+```

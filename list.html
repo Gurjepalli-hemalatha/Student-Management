@@ -1,0 +1,265 @@
+```html
+<!-- To list all students data -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List Students</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 30px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #49318c;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        nav {
+            margin: 20px 0;
+            line-height: 2.5;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5b45a0;
+            font-weight: bold;
+            padding: 8px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e84393;
+        }
+
+        h2 {
+            color: #49318c;
+            margin: 25px 0;
+        }
+
+        .table-box {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px;
+            font-size: 17px;
+        }
+
+        td {
+            padding: 14px;
+            color: #444;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        tr:nth-child(even) {
+            background: #f3f1ff;
+        }
+
+        tr:hover {
+            background: #e8e3ff;
+        }
+
+        button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .refresh-btn:hover {
+            background: #49318c;
+            transform: translateY(-3px);
+        }
+
+        .home-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .home-btn:hover {
+            background: #1e8449;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 STUDENT MANAGEMENT</h1>
+
+    <hr>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="list.html">List Students</a> |
+        <a href="listOne.html">List Required Student</a> |
+        <a href="insert.html">Insert Student</a> |
+        <a href="update.html">Update Student</a> |
+        <a href="delete.html">Delete Student</a>
+    </nav>
+
+    <hr>
+
+    <h2>📋 LIST OF STUDENTS</h2>
+
+    <button class="refresh-btn" onclick="loadStudents()">
+        🔄 Refresh List
+    </button>
+
+    <div class="table-box">
+
+        <table id="studentTable">
+        </table>
+
+    </div>
+
+    <br>
+
+    <button class="home-btn"
+    onclick="location.href='index.html'">
+        🏠 Home Page
+    </button>
+
+    <footer>
+        <hr>
+        <p>© 2026 Student Management System | All Rights Reserved</p>
+    </footer>
+
+</div>
+
+<script>
+
+loadStudents();
+
+function loadStudents()
+{
+    fetch("/students")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        let table = document.getElementById("studentTable");
+
+        table.innerHTML = `
+            <tr>
+                <th>Student Number</th>
+                <th>Student Name</th>
+                <th>Total Marks</th>
+            </tr>`;
+
+        if(data.length === 0)
+        {
+            table.innerHTML += `
+                <tr>
+                    <td colspan="3">No Students Found</td>
+                </tr>`;
+            return;
+        }
+
+        data.forEach(student => {
+
+            table.innerHTML += `
+                <tr>
+                    <td>${student.student_id}</td>
+                    <td>${student.student_name}</td>
+                    <td>${student.total}</td>
+                </tr>
+            `;
+
+        });
+
+    })
+
+    .catch(error => {
+        alert("Error loading student data: " + error.message);
+    });
+}
+
+</script>
+
+</body>
+</html>
+```

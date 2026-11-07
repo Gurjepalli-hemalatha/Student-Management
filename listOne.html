@@ -1,0 +1,325 @@
+```html
+<!-- To list one student data -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Student</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 30px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #49318c;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        nav {
+            margin: 20px 0;
+            line-height: 2.5;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #5b45a0;
+            font-weight: bold;
+            padding: 8px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e84393;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            background: #f8f7ff;
+            border: 1px solid #e0d9ff;
+            border-radius: 15px;
+        }
+
+        h2 {
+            color: #49318c;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        input:focus {
+            border-color: #764ba2;
+        }
+
+        button {
+            padding: 13px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        .search-btn {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .search-btn:hover {
+            background: #49318c;
+            transform: translateY(-3px);
+        }
+
+        .home-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .home-btn:hover {
+            background: #1e8449;
+            transform: translateY(-3px);
+        }
+
+        .table-box {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px;
+            font-size: 17px;
+        }
+
+        td {
+            padding: 14px;
+            color: #444;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        tr:nth-child(even) {
+            background: #f3f1ff;
+        }
+
+        tr:hover {
+            background: #e8e3ff;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+
+            .container {
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎓 STUDENT MANAGEMENT</h1>
+
+    <hr>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="list.html">List Students</a> |
+        <a href="listOne.html">List Required Student</a> |
+        <a href="insert.html">Insert Student</a> |
+        <a href="update.html">Update Student</a> |
+        <a href="delete.html">Delete Student</a>
+    </nav>
+
+    <hr>
+
+    <div class="search-box">
+
+        <h2>🔍 SEARCH STUDENT</h2>
+
+        <label>Student Number</label>
+
+        <input type="number" id="sno"
+        placeholder="Enter Student Number">
+
+        <br>
+
+        <button class="search-btn" onclick="searchStudent()">
+            🔍 Search Student
+        </button>
+
+    </div>
+
+    <h2>📋 STUDENT DETAILS</h2>
+
+    <div class="table-box">
+
+        <table id="studentTable">
+
+            <tr>
+                <th>Student Number</th>
+                <th>Name</th>
+                <th>Total Marks</th>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <button class="home-btn"
+    onclick="location.href='index.html'">
+        🏠 Home Page
+    </button>
+
+    <footer>
+        <hr>
+        <p>© 2026 Student Management System | All Rights Reserved</p>
+    </footer>
+
+</div>
+
+<script>
+
+function searchStudent()
+{
+    let sno = document.getElementById("sno").value;
+
+    if(sno === "" || Number(sno) <= 0)
+    {
+        alert("Please enter a valid Student Number");
+        return;
+    }
+
+    fetch("/students/" + sno)
+
+    .then(response => {
+
+        if(!response.ok)
+            throw new Error("Student Not Found");
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        if(data.length == 0)
+        {
+            alert("Student Not Found");
+            return;
+        }
+
+        let table = document.getElementById("studentTable");
+
+        table.innerHTML = `
+            <tr>
+                <th>Student Number</th>
+                <th>Name</th>
+                <th>Total Marks</th>
+            </tr>
+
+            <tr>
+                <td>${data[0].student_id}</td>
+                <td>${data[0].student_name}</td>
+                <td>${data[0].total}</td>
+            </tr>
+        `;
+
+    })
+
+    .catch(error => {
+        alert(error.message);
+    });
+
+}
+
+</script>
+
+</body>
+</html>
+```
